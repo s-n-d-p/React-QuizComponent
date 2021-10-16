@@ -9,9 +9,18 @@ class QuizQuestion extends Component {
                     <p>{this.props.quiz_question.instruction_text}</p>
                 </section>
                 <section className="buttons">
-                    <ul><QuizQuestionButton button_text={this.props.quiz_question.answer_options[0]}/></ul>
+                    <ul>
+                        {
+                            this.props.quiz_question.answer_options.map((option, index) =>
+                                <QuizQuestionButton key={index} button_text={option} clickHandler={this.handleClick.bind(this)} />)
+                        }
+                    </ul>
                 </section>
             </main>)
+    }
+
+    handleClick(button_text) {
+        (button_text === this.props.quiz_question.answer) && this.props.showNextQuestionHandler()
     }
 }
 
